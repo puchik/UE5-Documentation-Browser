@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>UE5 Documentation Browser</title>
+  </head>
+  <div class="native-toolbar"></div>
+  <div class="toolbar">
+    <img id="back-button" class="button" src="icons/back.svg"></img>
+    <img id="forward-button" class="button" src="icons/forward.svg"></img>
+    <img id="home-button" class="button" src="icons/home.svg"></img>
+    <img id="pin-button" class="button" src="icons/not_pinned.svg"></img>
+    <img id="unpin-button" class="button" src="icons/pinned.svg" style="display: none;"></img>
+    <div id="page-title" class="page-title"></div>
+  </div>
+  <body>
+    <div class="title">Loading</div>
+  </body>
+</html>

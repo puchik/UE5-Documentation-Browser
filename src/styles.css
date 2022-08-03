@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Brutal Light';
+    src: url(fonts/brutal-type-light.ttf);
+}
+
+html {
+    background-color: #000925;
+    color: #ffffff;
+    font-family: 'Brutal Light';
+    font-size: 1em;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+}
+
+.title {
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+    height: 2em;
+    padding-top: 2em;
+}
+
+.native-toolbar {
+    background-color: #000925;
+    display: block;
+    height: 30px;
+    width: 100%;
+    -webkit-app-region: drag;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.toolbar {
+    background-color: #060f2c;
+    display: block;
+    height: 25px;
+    width: 100%;
+    padding: 0.5em;
+    padding-left: 0.7em;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.button {
+    height: 25px;
+    width: 25px;
+    font-family: 'Brutal Light';
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    filter: invert(1);
+    padding-right: 0.7em;
+}
+
+.page-title {
+    display: inline-block;
+    height: 100%;
+}
