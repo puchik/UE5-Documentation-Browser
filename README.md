@@ -1,6 +1,8 @@
 # UE5 Documentation Browser
  A simple electron-based app used for browsing the UE5 documentation which you can pin on top of all windows.
 
+ ![](https://puchik.now.sh/images/ue5-docs-post/app.jpg)
+
 While navigating the painful experience of getting an IDE that works well with unreal engine, I found a neat [UnrealVsCodeHelper](https://github.com/hcabel/UnrealVsCodeHelper) extension that had a built in browser for the documentation. I'm still not entirely convinced on using VS Code for UE (yet?), but I did really enjoy this idea and would have liked it to have it in Visual Studio.
 
 I decided to quickly built an electron app that is basically a cut-down glorified web browser that lets you browse the UE docs.
