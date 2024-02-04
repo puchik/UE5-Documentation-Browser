@@ -2,7 +2,7 @@ const { ipcRenderer } = require("electron");
 
 window.addEventListener('DOMContentLoaded', () => {
     // Hide header and footer (search page or docs pages)
-    const header = document.getElementById('egh');
+    const header = document.getElementsByTagName('unrealengine-navigation')[0];
     if (header)
     {
         header.style.display = 'none';
@@ -22,26 +22,27 @@ window.addEventListener('DOMContentLoaded', () => {
     {
         docsFooter.style.display = 'none';
     }
+    const newsletter = document.getElementById('ue-newsletter');
+    if (newsletter)
+    {
+        newsletter.style.display = 'none';
+    }
 
     /// Hide some tabs (make space and prevent excessive navigation)
     // All
-    waitForElement('div.cwYiqZ [tabindex="0"]').then((elm) => {
+    waitForElement('div.ue-filter-tab[tabindex="0"]').then((elm) => {
         elm.style.display = 'none';
     });
     // News
-    waitForElement('div.cwYiqZ [tabindex="1"]').then((elm) => {
+    waitForElement('div.ue-filter-tab[tabindex="1"]').then((elm) => {
         elm.style.display = 'none';
     });
     // Forum
-    waitForElement('div.cwYiqZ [tabindex="3"]').then((elm) => {
-        elm.style.display = 'none';
-    });
-    // Python
-    waitForElement('div.cwYiqZ [tabindex="4"]').then((elm) => {
+    waitForElement('div.ue-filter-tab[tabindex="3"]').then((elm) => {
         elm.style.display = 'none';
     });
     // UDK
-    waitForElement('div.cwYiqZ [tabindex="7"]').then((elm) => {
+    waitForElement('div.ue-filter-tab[tabindex="7"]').then((elm) => {
         elm.style.display = 'none';
     });
 

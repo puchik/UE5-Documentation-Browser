@@ -44,9 +44,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Catch title updates
     ipcRenderer.on('updateTitle', function(event, newTitle) {
-        const titleElement = document.getElementById('page-title');
-        if (titleElement) {
-            titleElement.innerText = newTitle;
+        const pageTitleElement = document.getElementById('page-title');
+        if (pageTitleElement) {
+            pageTitleElement.innerText = newTitle;
+        }
+        const windowTitleElement = document.getElementById('window-title');
+        if (windowTitleElement) {
+            windowTitleElement.innerText = newTitle;
         }
     })
 })

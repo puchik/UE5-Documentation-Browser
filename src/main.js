@@ -43,6 +43,9 @@ app.whenReady().then(() => {
     });
     win.setBrowserView(browserView);
     win.loadFile('index.html');
+    win.setAppDetails({
+        appId: "UE5DocBrowser"
+    })
 
     // Position the titlebar
     const contentBounds = win.getContentBounds();
