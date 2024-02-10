@@ -3,9 +3,12 @@ const path = require('path')
 const { app, BrowserWindow, BrowserView, ipcMain } = require('electron')
 
 const TITLEBAR_HEIGHT = 45 + 25;
-const MAIN_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=C%2B%2B%20API&keyword=';
+const SECOND_BAR_HEIGHT = 35;
+const MAIN_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=Documentation';
+const CPP_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=C%2B%2B%20API';
+const BP_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=Blueprint API';
 const DEFAULT_HEIGHT = 950;
-const DEFAULT_WIDTH = 850;
+const DEFAULT_WIDTH = 1200;
 
 const createWindow = () => {
 }
@@ -44,12 +47,13 @@ app.whenReady().then(() => {
     win.setBrowserView(browserView);
     win.loadFile('index.html');
     win.setAppDetails({
-        appId: "UE5DocBrowser"
+        appId: 'UE5DocBrowser'
     })
+    //win.webContents.openDevTools();
 
     // Position the titlebar
     const contentBounds = win.getContentBounds();
-    browserView.setBounds({ x: 0, y: TITLEBAR_HEIGHT, width: contentBounds.width, height: contentBounds.height - TITLEBAR_HEIGHT });
+    browserView.setBounds({ x: 0, y: TITLEBAR_HEIGHT + SECOND_BAR_HEIGHT, width: contentBounds.width, height: contentBounds.height - TITLEBAR_HEIGHT });
     browserView.setAutoResize({ width: true, height: true });
 
     browserView.webContents.loadURL(MAIN_URL);
@@ -63,7 +67,7 @@ app.whenReady().then(() => {
         }
     })
 
-    // Set up buttons
+    // Set up navigation buttons.
     ipcMain.handle('goBack', (event, ...args) => {
         browserView.webContents.goBack();
     });
@@ -73,13 +77,44 @@ app.whenReady().then(() => {
     ipcMain.handle('goHome', (event, ...args) => {
         browserView.webContents.loadURL(MAIN_URL);
     });
+    ipcMain.handle('goHomeCpp', (event, ...args) => {
+        browserView.webContents.loadURL(CPP_URL);
+    });
+    ipcMain.handle('goHomeBp', (event, ...args) => {
+        browserView.webContents.loadURL(BP_URL);
+    });
+
+    /// Search functionality.
+    // Search triggers.
+    ipcMain.handle('search', (event, ...args) => {
+        browserView.webContents.findInPage(args[0], { findNext: args[1], forward: args[2] });
+    });
+    ipcMain.handle('stopSearch', (event, ...args) => {
+        browserView.webContents.stopFindInPage('clearSelection');
+    });
+    // Search shortcut for when focus is on the browser/doc window.
+    browserView.webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key.toLowerCase() === 'f') {
+            // Steal focus first, otherwise nothing happens.
+            win.webContents.focus();
+            win.webContents.send('focusSearch');
+        }
+    })
+    // Search shortcut for when focus is on the application's toolbar(s)
+    win.webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key.toLowerCase() === 'f') {
+            win.webContents.send('focusSearch');
+        }
+    })
+
+    // Pinning
     ipcMain.handle('pin', (event, ...args) => {
-        win.setAlwaysOnTop(true, "floating");
+        win.setAlwaysOnTop(true, 'floating');
         win.setVisibleOnAllWorkspaces(true);
         win.setFullScreenable(false);
     });
     ipcMain.handle('unpin', (event, ...args) => {
-        win.setAlwaysOnTop(false, "floating");
+        win.setAlwaysOnTop(false, 'floating');
         win.setVisibleOnAllWorkspaces(false);
         win.setFullScreenable(true);
     });

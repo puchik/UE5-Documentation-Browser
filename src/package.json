@@ -1,7 +1,7 @@
 {
   "name": "ue5-documentation-browser",
   "productName": "ue5-documentation-browser",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple browser for the UE5 API",
   "main": "main.js",
   "scripts": {
@@ -55,6 +55,6 @@
     "@electron-forge/maker-squirrel": "^6.4.2",
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
-    "electron": "19.0.10"
+    "electron": "^28.2.1"
   }
 }
