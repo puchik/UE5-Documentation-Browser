@@ -29,25 +29,14 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     /// Hide some tabs (make space and prevent excessive navigation)
-    // All
-    waitForElement('div.ue-filter-tab[tabindex="0"]').then((elm) => {
-        elm.style.display = 'none';
-    });
-    // News
-    waitForElement('div.ue-filter-tab[tabindex="1"]').then((elm) => {
-        elm.style.display = 'none';
-    });
-    // Forum
-    waitForElement('div.ue-filter-tab[tabindex="3"]').then((elm) => {
-        elm.style.display = 'none';
-    });
-    // UDK
-    waitForElement('div.ue-filter-tab[tabindex="7"]').then((elm) => {
-        elm.style.display = 'none';
-    });
+    hideExtraTabs();
 
     ipcRenderer.invoke('updateTitle', document.title);
 })
+
+window.addEventListener('resize', (event) => {
+    hideExtraTabs();
+}, true);
 
 function waitForElement(selector) {
     return new Promise(resolve => {
@@ -66,5 +55,26 @@ function waitForElement(selector) {
             childList: true,
             subtree: true
         });
+    });
+}
+
+function hideExtraTabs() {
+    // To make this neater, let's remove some of the tabs that may
+    // be of lower importance. It'll make space and prevent excessive navigation)
+    // All
+    waitForElement('div.ue-filter-tab[tabindex="0"]').then((elm) => {
+        elm.style.display = 'none';
+    });
+    // News
+    waitForElement('div.ue-filter-tab[tabindex="1"]').then((elm) => {
+        elm.style.display = 'none';
+    });
+    // Forum
+    waitForElement('div.ue-filter-tab[tabindex="3"]').then((elm) => {
+        elm.style.display = 'none';
+    });
+    // UDK
+    waitForElement('div.ue-filter-tab[tabindex="7"]').then((elm) => {
+        elm.style.display = 'none';
     });
 }
