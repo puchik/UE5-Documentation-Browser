@@ -2,25 +2,19 @@ const { ipcRenderer } = require("electron");
 
 window.addEventListener('DOMContentLoaded', () => {
   // Hide header and footer (search page or docs pages)
-  const header = document.getElementsByTagName('unrealengine-navigation')[0];
+  const header = document.getElementsByTagName('site-header')[0];
   if (header) {
     header.style.display = 'none';
   }
-  const footer = document.getElementById('egf');
+  const footer = document.getElementsByTagName('site-footer')[0];
   if (footer) {
     footer.style.display = 'none';
   }
-  const docsHeader = document.getElementById('head');
-  if (docsHeader) {
-    docsHeader.style.display = 'none';
-  }
-  const docsFooter = document.getElementById('footer');
-  if (docsFooter) {
-    docsFooter.style.display = 'none';
-  }
-  const newsletter = document.getElementById('ue-newsletter');
-  if (newsletter) {
-    newsletter.style.display = 'none';
+
+  // Padding at the top is a bit too large once you remove the header, move it up a bit.
+  const pageContent = document.getElementsByClassName('site-container')[0];
+  if (pageContent) {
+    pageContent.style.marginTop = '-3.0em';
   }
 
   /// Hide some tabs (make space and prevent excessive navigation)
@@ -56,20 +50,15 @@ function waitForElement(selector) {
 function hideExtraTabs() {
   // To make this neater, let's remove some of the tabs that may
   // be of lower importance. It'll make space and prevent excessive navigation)
-  // All
-  waitForElement('div.ue-filter-tab[tabindex="0"]').then((elm) => {
-    elm.style.display = 'none';
-  });
-  // News
-  waitForElement('div.ue-filter-tab[tabindex="1"]').then((elm) => {
-    elm.style.display = 'none';
-  });
-  // Forum
-  waitForElement('div.ue-filter-tab[tabindex="3"]').then((elm) => {
-    elm.style.display = 'none';
-  });
-  // UDK
-  waitForElement('div.ue-filter-tab[tabindex="7"]').then((elm) => {
-    elm.style.display = 'none';
+  waitForElement('ul.content-items-filters-list').then((elm) => {
+    const dateFilter = elm.children[0];
+    if (dateFilter) {
+      dateFilter.style.display = 'none';
+    }
+
+    const appFilter = elm.children[1];
+    if (appFilter) {
+      appFilter.style.display = 'none';
+    }
   });
 }

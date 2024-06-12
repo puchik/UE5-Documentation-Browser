@@ -4,11 +4,11 @@ const { app, BrowserWindow, BrowserView, ipcMain } = require('electron')
 
 const TITLEBAR_HEIGHT = 45 + 25;
 const SECOND_BAR_HEIGHT = 35;
-const MAIN_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=Documentation';
-const CPP_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=C%2B%2B%20API';
-const BP_URL = 'https://www.unrealengine.com/en-US/search?x=0&y=0&filter=Blueprint API';
+const MAIN_URL = 'https://dev.epicgames.com/community/search?applications=unreal_engine&sort_by=relevancy&types=document';
+const CPP_URL = 'https://dev.epicgames.com/community/search?applications=unreal_engine&sort_by=relevancy&types=api_document';
+const BP_URL = 'https://dev.epicgames.com/community/search?applications=unreal_engine&sort_by=relevancy&types=api_document';
 const DEFAULT_HEIGHT = 950;
-const DEFAULT_WIDTH = 1200;
+const DEFAULT_WIDTH = 1260;
 
 const createWindow = () => {
 }
